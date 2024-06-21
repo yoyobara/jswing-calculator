@@ -12,6 +12,6 @@ public class OutputLabel extends JLabel {
         super();
         setOpaque(true);
         setBackground(new Color(30, 30, 30));
-        setText("hello world my name");
+        setFont(Calculator.FONT);
     }
 }

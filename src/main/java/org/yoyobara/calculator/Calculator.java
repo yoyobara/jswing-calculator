@@ -3,6 +3,7 @@ package org.yoyobara.calculator;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 
@@ -10,11 +11,21 @@ import javax.swing.JPanel;
  * Calculator
  */
 public class Calculator extends JPanel {
+
+    public static Font FONT = new Font("Arial", Font.BOLD, 30);
+
     private OutputLabel outputLabel;
+
     private NumberButton[] numberButtons;
     private NumberButton zeroButton;
+
     private CalcButton dotButton;
     private CalcButton equalButton;
+
+    private CalcButton addButton;
+    private CalcButton subtractButton;
+    private CalcButton multiplyButton;
+    private CalcButton divideButton;
 
     private void addStuffToPanel() {
         this.setLayout(new GridBagLayout());
@@ -27,7 +38,7 @@ public class Calculator extends JPanel {
         // add the output field
         cons.gridx = 0;
         cons.gridy = 0;
-        cons.gridwidth = 3;
+        cons.gridwidth = 4;
         this.add(this.outputLabel, cons);
 
         cons.gridwidth = 1;
@@ -52,6 +63,20 @@ public class Calculator extends JPanel {
         // add equal
         cons.gridx = 2;
         this.add(this.equalButton, cons);
+    
+        // add operations
+        cons.gridx = 3;
+        cons.gridy = 1;
+        this.add(this.addButton, cons);
+
+        cons.gridy++;
+        this.add(this.subtractButton, cons);
+
+        cons.gridy++;
+        this.add(this.multiplyButton, cons);
+
+        cons.gridy++;
+        this.add(this.divideButton, cons);
     }
 
     public Calculator() {
@@ -59,10 +84,18 @@ public class Calculator extends JPanel {
 
         // components
         this.outputLabel = new OutputLabel();
-        this.numberButtons = new NumberButton[10];
+
+        // buttons
+        this.numberButtons = new NumberButton[9];
         this.zeroButton = new NumberButton(0);
+
         this.dotButton = new CalcButton(".");
         this.equalButton = new CalcButton("=");
+
+        this.addButton = new CalcButton("+");
+        this.subtractButton = new CalcButton("-");
+        this.multiplyButton = new CalcButton("*");
+        this.divideButton = new CalcButton("/");
 
         for (int i = 0 ; i < 9 ; i++) {
             numberButtons[i] = new NumberButton(i + 1);
