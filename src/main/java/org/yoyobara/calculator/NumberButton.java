@@ -1,6 +1,5 @@
 package org.yoyobara.calculator;
 
-
 class NumberButton extends CalcButton {
     private int number;
 
