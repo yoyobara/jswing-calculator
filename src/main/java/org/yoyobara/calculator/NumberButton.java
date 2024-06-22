@@ -3,8 +3,8 @@ package org.yoyobara.calculator;
 class NumberButton extends CalcButton {
     private int number;
 
-    public NumberButton(int number) {
-        super(Integer.toString(number));
+    public NumberButton(int number, CalcLogic logicCtx) {
+        super(Integer.toString(number), logicCtx);
         this.number = number;
     }
 

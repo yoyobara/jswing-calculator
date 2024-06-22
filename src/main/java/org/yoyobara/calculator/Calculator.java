@@ -3,8 +3,6 @@ package org.yoyobara.calculator;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -24,12 +22,10 @@ public class Calculator extends JPanel {
     private CalcButton dotButton;
     private CalcButton equalButton;
 
-    private CalcButton addButton;
-    private CalcButton subtractButton;
-    private CalcButton multiplyButton;
-    private CalcButton divideButton;
-
-    private String buffer;
+    private OperatorButton addButton;
+    private OperatorButton subtractButton;
+    private OperatorButton multiplyButton;
+    private OperatorButton divideButton;
 
     private void addStuffToPanel() {
         this.setLayout(new GridBagLayout());
@@ -83,60 +79,55 @@ public class Calculator extends JPanel {
         this.add(this.divideButton, cons);
     }
 
-    private void addActionListeners() {
-        // number buttons
-        for (NumberButton button : this.numberButtons) {
-            button.addActionListener(new ActionListener() {
+    public void addOperators() {
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-                    buffer += button.getNumber();
-                    updateOutputLabel();
-				}
-                
-            });
-        }
-
-        // NOTE deubg
-        zeroButton.addActionListener(new ActionListener() {
+        this.addButton = new OperatorButton("+") {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-                System.out.println(outputLabel.getSize());
-			}
-            
-        });
-    }
+			public double applyOperation(double a, double b) { return a + b; }
 
-    private void updateOutputLabel() {
-        this.outputLabel.setText(buffer);
+        };
+
+        this.subtractButton = new OperatorButton("-") {
+
+			@Override
+			public double applyOperation(double a, double b) { return a - b; }
+
+        };
+
+        this.multiplyButton = new OperatorButton("*") {
+
+			@Override
+			public double applyOperation(double a, double b) { return a * b; }
+
+        }; 
+
+        this.divideButton = new OperatorButton("/") {
+
+			@Override
+			public double applyOperation(double a, double b) { return a / b; }
+        };
     }
 
     public Calculator() {
         super();
-
-        this.buffer = new String();
 
         // components
         this.outputLabel = new OutputLabel();
 
         // buttons
         this.numberButtons = new NumberButton[9];
+        for (int i = 0 ; i < 9 ; i++) {
+            numberButtons[i] = new NumberButton(i + 1);
+        }
+
         this.zeroButton = new NumberButton(0);
 
         this.dotButton = new CalcButton(".");
         this.equalButton = new CalcButton("=");
 
-        this.addButton = new CalcButton("+");
-        this.subtractButton = new CalcButton("-");
-        this.multiplyButton = new CalcButton("*");
-        this.divideButton = new CalcButton("/");
+        addOperators();
 
-        for (int i = 0 ; i < 9 ; i++) {
-            numberButtons[i] = new NumberButton(i + 1);
-        }
-
-        addActionListeners();
         addStuffToPanel();
     }
 }
