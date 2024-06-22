@@ -1,11 +1,16 @@
 package org.yoyobara.calculator;
 
-class NumberButton extends CalcButton {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class NumberButton extends CalcButton implements ActionListener {
     private int number;
 
     public NumberButton(int number, CalcLogic logicCtx) {
         super(Integer.toString(number), logicCtx);
         this.number = number;
+
+        this.addActionListener(this);
     }
 
     /*
@@ -14,4 +19,9 @@ class NumberButton extends CalcButton {
     public int getNumber() {
         return this.number;
     }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+        logicCtx.addDigitToBuffer(this.number);
+	}
 }

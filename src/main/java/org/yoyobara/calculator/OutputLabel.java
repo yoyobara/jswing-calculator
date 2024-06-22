@@ -16,4 +16,11 @@ public class OutputLabel extends JLabel {
         setFont(Calculator.FONT);
         setPreferredSize(new Dimension(0, 64));
     }
+
+    /*
+     * append string to label
+     */
+    public void append(String s) {
+        setText(getText() + s);
+    }
 }

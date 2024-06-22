@@ -5,9 +5,10 @@ package org.yoyobara.calculator;
  */
 public class CalcLogic {
 
-    private String buffer = "";
+    private OutputLabel output;
 
-    public CalcLogic() {
+    public CalcLogic(OutputLabel out) {
+        this.output = out;
     }
 
     public void addDigitToBuffer(int number) {
@@ -15,17 +16,15 @@ public class CalcLogic {
             throw new IllegalArgumentException("bad digit: " + number);
         }
 
-        buffer += number;
+        output.append(Integer.toString(number));
     }
 
     public void addDotToBuffer() {
-        if (buffer.contains(".")) {
-            throw new IllegalArgumentException("dot already there...");
-        }
-
-        buffer += ".";
+        if (!output.getText().contains(".")) 
+            output.append(".");
     }
 
     public void performBinaryOperation(BinaryOperation binOp) {
+        throw new UnsupportedOperationException("NOT IMPLEMENTED YET!!");
     }
 }

@@ -27,6 +27,8 @@ public class Calculator extends JPanel {
     private OperatorButton multiplyButton;
     private OperatorButton divideButton;
 
+    private CalcLogic logic;
+
     private void addStuffToPanel() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints cons = new GridBagConstraints();
@@ -81,32 +83,10 @@ public class Calculator extends JPanel {
 
     public void addOperators() {
 
-        this.addButton = new OperatorButton("+") {
-
-			@Override
-			public double applyOperation(double a, double b) { return a + b; }
-
-        };
-
-        this.subtractButton = new OperatorButton("-") {
-
-			@Override
-			public double applyOperation(double a, double b) { return a - b; }
-
-        };
-
-        this.multiplyButton = new OperatorButton("*") {
-
-			@Override
-			public double applyOperation(double a, double b) { return a * b; }
-
-        }; 
-
-        this.divideButton = new OperatorButton("/") {
-
-			@Override
-			public double applyOperation(double a, double b) { return a / b; }
-        };
+        this.addButton = new OperatorButton("+", logic, (a, b) -> a + b);
+        this.subtractButton = new OperatorButton("-", logic, (a, b) -> a - b);
+        this.multiplyButton = new OperatorButton("*", logic, (a, b) -> a * b);
+        this.divideButton = new OperatorButton("/", logic, (a, b) -> a / b);
     }
 
     public Calculator() {
@@ -115,19 +95,21 @@ public class Calculator extends JPanel {
         // components
         this.outputLabel = new OutputLabel();
 
+        // logic
+        this.logic = new CalcLogic(outputLabel);
+
         // buttons
         this.numberButtons = new NumberButton[9];
         for (int i = 0 ; i < 9 ; i++) {
-            numberButtons[i] = new NumberButton(i + 1);
+            numberButtons[i] = new NumberButton(i + 1, logic);
         }
 
-        this.zeroButton = new NumberButton(0);
+        this.zeroButton = new NumberButton(0, logic);
 
-        this.dotButton = new CalcButton(".");
-        this.equalButton = new CalcButton("=");
+        this.dotButton = new CalcButton(".", logic);
+        this.equalButton = new CalcButton("=", logic);
 
         addOperators();
-
         addStuffToPanel();
     }
 }
