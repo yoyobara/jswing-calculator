@@ -96,6 +96,16 @@ public class Calculator extends JPanel {
                 
             });
         }
+
+        // NOTE deubg
+        zeroButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+                System.out.println(outputLabel.getSize());
+			}
+            
+        });
     }
 
     private void updateOutputLabel() {
