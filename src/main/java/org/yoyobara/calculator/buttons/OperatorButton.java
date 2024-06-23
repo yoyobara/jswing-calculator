@@ -1,17 +1,17 @@
-package org.yoyobara.calculator;
+package org.yoyobara.calculator.buttons;
+
+import org.yoyobara.calculator.BinaryOperation;
+import org.yoyobara.calculator.CalcLogic;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class OperatorButton extends CalcButton implements ActionListener {
+public class OperatorButton extends CalcButton {
 
     private BinaryOperation binOp;
 
 	public OperatorButton(String content, CalcLogic logicCtx, BinaryOperation binOp) {
 		super(content, logicCtx);
         this.binOp = binOp;
-
-        addActionListener(this);
 	}
 
 	@Override

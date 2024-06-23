@@ -23,4 +23,16 @@ public class OutputLabel extends JLabel {
     public void append(String s) {
         setText(getText() + s);
     }
+
+    public void clear() {
+        setText("");
+    }
+
+    public double get() throws NumberFormatException {
+        return Double.parseDouble(getText());
+    }
+
+    public void set(double val) {
+        setText(Double.toString(val));
+    }
 }

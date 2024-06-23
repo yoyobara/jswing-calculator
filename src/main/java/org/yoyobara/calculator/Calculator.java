@@ -3,9 +3,12 @@ package org.yoyobara.calculator;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.awt.Font;
 
 import javax.swing.JPanel;
+
+import org.yoyobara.calculator.buttons.*;
 
 /**
  * Calculator
@@ -19,8 +22,8 @@ public class Calculator extends JPanel {
     private NumberButton[] numberButtons;
     private NumberButton zeroButton;
 
-    private CalcButton dotButton;
-    private CalcButton equalButton;
+    private DotButton dotButton;
+    private EqualsButton equalButton;
 
     private OperatorButton addButton;
     private OperatorButton subtractButton;
@@ -81,7 +84,7 @@ public class Calculator extends JPanel {
         this.add(this.divideButton, cons);
     }
 
-    public void addOperators() {
+    public void initSpecialButtons() {
 
         this.addButton = new OperatorButton("+", logic, (a, b) -> a + b);
         this.subtractButton = new OperatorButton("-", logic, (a, b) -> a - b);
@@ -106,10 +109,10 @@ public class Calculator extends JPanel {
 
         this.zeroButton = new NumberButton(0, logic);
 
-        this.dotButton = new CalcButton(".", logic);
-        this.equalButton = new CalcButton("=", logic);
+        this.dotButton = new DotButton(logic);
+        this.equalButton = new EqualsButton(logic);
 
-        addOperators();
+        initSpecialButtons();
         addStuffToPanel();
     }
 }
