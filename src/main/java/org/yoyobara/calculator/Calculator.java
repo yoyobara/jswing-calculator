@@ -4,7 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -26,10 +25,15 @@ public class Calculator extends JPanel {
     private CalcButton dotButton;
     private CalcButton equalButton;
 
-    private OperatorButton addButton;
-    private OperatorButton subtractButton;
-    private OperatorButton multiplyButton;
-    private OperatorButton divideButton;
+    private BinaryOperatorButton addButton;
+    private BinaryOperatorButton subtractButton;
+    private BinaryOperatorButton multiplyButton;
+    private BinaryOperatorButton divideButton;
+
+    private UnaryOperatorButton sinButton;
+    private UnaryOperatorButton cosButton;
+    private UnaryOperatorButton tanButton;
+    private UnaryOperatorButton sqrtButton;
 
     private ClearButton clearButton;
 
@@ -54,14 +58,14 @@ public class Calculator extends JPanel {
         // add 1 - 9 number buttons
         for (int i = 0 ; i < 9 ; i++) {
             cons.gridx = i % 3;
-            cons.gridy = 1 + i / 3;
+            cons.gridy = 2 + i / 3;
 
             this.add(this.numberButtons[i], cons);
         }
 
         // add zero
         cons.gridx = 0;
-        cons.gridy = 4;
+        cons.gridy = 5;
         this.add(this.zeroButton, cons);
 
         // add dot
@@ -74,7 +78,7 @@ public class Calculator extends JPanel {
     
         // add operations
         cons.gridx = 3;
-        cons.gridy = 1;
+        cons.gridy = 2;
         this.add(this.addButton, cons);
 
         cons.gridy++;
@@ -86,19 +90,44 @@ public class Calculator extends JPanel {
         cons.gridy++;
         this.add(this.divideButton, cons);
         
-        // add clear
+        // add clear button
         cons.gridx = 4;
         cons.gridy = 1;
-        cons.gridheight = 4;
+        cons.gridheight = 5;
         this.add(this.clearButton, cons);
+
+        // add unary stuff
+        cons.gridy = 1;
+        cons.gridx = 0;
+        cons.gridheight = 1;
+
+        this.add(this.sqrtButton, cons);
+        cons.gridx++;
+
+        this.add(this.sinButton, cons);
+        cons.gridx++;
+
+        this.add(this.cosButton, cons);
+        cons.gridx++;
+
+        this.add(this.tanButton, cons);
     }
 
     public void initSpecialButtons() {
 
-        this.addButton = new OperatorButton("+", logic, (a, b) -> a + b);
-        this.subtractButton = new OperatorButton("-", logic, (a, b) -> a - b);
-        this.multiplyButton = new OperatorButton("*", logic, (a, b) -> a * b);
-        this.divideButton = new OperatorButton("/", logic, (a, b) -> a / b);
+        // basic binOps
+        this.addButton = new BinaryOperatorButton("+", logic, (a, b) -> a + b);
+        this.subtractButton = new BinaryOperatorButton("-", logic, (a, b) -> a - b);
+        this.multiplyButton = new BinaryOperatorButton("×", logic, (a, b) -> a * b);
+        this.divideButton = new BinaryOperatorButton("÷", logic, (a, b) -> a / b);
+
+        // more operators
+        this.sinButton = new UnaryOperatorButton("sin", logic, Math::sin);
+        this.cosButton = new UnaryOperatorButton("cos", logic, Math::cos);
+        this.tanButton = new UnaryOperatorButton("tan", logic, Math::tan);
+        this.sqrtButton = new UnaryOperatorButton("√", logic, Math::sqrt);
+
+        // action buttons
 
         this.dotButton = new CalcButton(".", logic) {
             public void actionPerformed(ActionEvent arg0) {

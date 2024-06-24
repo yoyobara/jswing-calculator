@@ -39,7 +39,7 @@ public class CalcLogic {
         }
     }
 
-    public void performBinaryOperation(BinaryOperation binOp) {
+    public void performOperation(BinaryOperation binOp) {
 
         if (this.pending.isEmpty()) {
             this.pending = Optional.of(new Pending(takeNumberFromOutput(), binOp));
@@ -50,6 +50,11 @@ public class CalcLogic {
             double result = currentPending.pendingOperation.performOperation(currentPending.pendingNumber, currentNumber);
             this.pending = Optional.of(new Pending(result, binOp));
         }
+    }
+
+    public void performOperation(UnaryOperation unOp) {
+        performEqualButton(); // in case something is pending
+        this.output.set(unOp.performOperation(this.output.get()));
     }
 
     public void performEqualButton() {

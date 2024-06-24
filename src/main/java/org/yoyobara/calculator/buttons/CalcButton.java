@@ -1,5 +1,6 @@
 package org.yoyobara.calculator.buttons;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,8 @@ public class CalcButton extends JButton implements ActionListener {
     public CalcButton(String content, CalcLogic logicCtx) {
         super();
         this.logicCtx = logicCtx;
+
+        setPreferredSize(new Dimension(2, 2));
 
         setText(content);
         setFont(Calculator.FONT);
