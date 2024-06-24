@@ -35,4 +35,8 @@ public class OutputLabel extends JLabel {
     public void set(double val) {
         setText(Double.toString(val));
     }
+
+    public boolean isEmpty() {
+        return getText().isEmpty();
+    }
 }

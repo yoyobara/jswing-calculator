@@ -53,6 +53,9 @@ public class CalcLogic {
     }
 
     public void performOperation(UnaryOperation unOp) {
+        if (output.isEmpty())
+            return;
+
         performEqualButton(); // in case something is pending
         this.output.set(unOp.performOperation(this.output.get()));
     }
