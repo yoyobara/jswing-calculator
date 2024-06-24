@@ -3,6 +3,7 @@ package org.yoyobara.calculator;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
 
@@ -22,8 +23,8 @@ public class Calculator extends JPanel {
     private NumberButton[] numberButtons;
     private NumberButton zeroButton;
 
-    private DotButton dotButton;
-    private EqualsButton equalButton;
+    private CalcButton dotButton;
+    private CalcButton equalButton;
 
     private OperatorButton addButton;
     private OperatorButton subtractButton;
@@ -90,12 +91,25 @@ public class Calculator extends JPanel {
         this.subtractButton = new OperatorButton("-", logic, (a, b) -> a - b);
         this.multiplyButton = new OperatorButton("*", logic, (a, b) -> a * b);
         this.divideButton = new OperatorButton("/", logic, (a, b) -> a / b);
+
+        this.dotButton = new CalcButton(".", logic) {
+            public void actionPerformed(ActionEvent arg0) {
+                logic.addDotToBuffer();
+            }
+        };
+
+        this.equalButton = new CalcButton("=", logic) {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                logic.performEqualButton();
+            }
+        };
     }
 
     public Calculator() {
         super();
 
-        // components
+        // output component
         this.outputLabel = new OutputLabel();
 
         // logic
@@ -108,11 +122,8 @@ public class Calculator extends JPanel {
         }
 
         this.zeroButton = new NumberButton(0, logic);
-
-        this.dotButton = new DotButton(logic);
-        this.equalButton = new EqualsButton(logic);
-
         initSpecialButtons();
+
         addStuffToPanel();
     }
 }

@@ -1,7 +1,6 @@
 package org.yoyobara.calculator;
 
 import java.util.Optional;
-import java.util.OptionalDouble;
 
 /**
  * this contains the actual logic of the calculator.
