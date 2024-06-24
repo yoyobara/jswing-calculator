@@ -43,7 +43,6 @@ public class Calculator extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints cons = new GridBagConstraints();
         cons.weightx = 1.0;
-        cons.weighty = 1.0;
         cons.insets = new Insets(5, 5, 5, 5);
         cons.fill = GridBagConstraints.BOTH;
 
@@ -54,6 +53,7 @@ public class Calculator extends JPanel {
         this.add(this.outputLabel, cons);
 
         cons.gridwidth = 1;
+        cons.weighty = 1.0;
 
         // add 1 - 9 number buttons
         for (int i = 0 ; i < 9 ; i++) {
