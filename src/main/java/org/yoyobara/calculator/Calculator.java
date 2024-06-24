@@ -31,6 +31,8 @@ public class Calculator extends JPanel {
     private OperatorButton multiplyButton;
     private OperatorButton divideButton;
 
+    private ClearButton clearButton;
+
     private CalcLogic logic;
 
     private void addStuffToPanel() {
@@ -44,7 +46,7 @@ public class Calculator extends JPanel {
         // add the output field
         cons.gridx = 0;
         cons.gridy = 0;
-        cons.gridwidth = 4;
+        cons.gridwidth = 5;
         this.add(this.outputLabel, cons);
 
         cons.gridwidth = 1;
@@ -83,6 +85,12 @@ public class Calculator extends JPanel {
 
         cons.gridy++;
         this.add(this.divideButton, cons);
+        
+        // add clear
+        cons.gridx = 4;
+        cons.gridy = 1;
+        cons.gridheight = 4;
+        this.add(this.clearButton, cons);
     }
 
     public void initSpecialButtons() {
@@ -104,12 +112,15 @@ public class Calculator extends JPanel {
                 logic.performEqualButton();
             }
         };
+
+        this.clearButton = new ClearButton("AC", logic);
+        this.logic.setClearButton(this.clearButton);
     }
 
     public Calculator() {
         super();
 
-        // output component
+        // output component, clear button
         this.outputLabel = new OutputLabel();
 
         // logic
